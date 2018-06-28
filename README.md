@@ -17,5 +17,11 @@ This the interface between Java EE application clients (running on the client ma
 ### Web container
 This is the interface between web components (servlets, jsf ...) and the Javee server/platform
 ### EJB container
-This is the interface between enterprise beans and the Java EE server/platform.
+This is the interface between enterprise beans and the Java EE server/platform.  
+
+
+In javaee application, modules are packaged as EAR, JAR and WAR:  
+- JAR: EJB modules + EJB deployment descriptor (META-INF/ejb-jar.xml) are packed as JAR files with .jar extenstion. It's loaded into EJB container.  
+- WAR: Web modules (Servlets, JSPs ..) + WEB  deployment descriptor (WEB-INF/web.xml) are packaged as JAR file with .war extension. loaded into WEB container.   
+- EAR: All above files (.jar and .war) are packaged as JAR file with .ear extension. It packs also WEB-INF/application.xml
 

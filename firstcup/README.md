@@ -7,9 +7,8 @@
 
 # Packaging / Deployment
 - JSF application + DukesBirthdayBean ejb + FirstcupUser JPA entity: will be packaged in one war.
-- JAX-RS DukesAgeResource: will be packaged (and can be depoyed) separately.
+- JAX-RS DukesAgeResource: will be packaged (and can be deployed) separately.
 Notice that the war application is actually a javaee client for DukesAgeResource.
-
 
 # Run on glassfish
 /bin/asadmin  
