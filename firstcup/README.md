@@ -12,6 +12,7 @@ Notice that the war application is actually a javaee client for DukesAgeResource
 
 # Run on glassfish
 /bin/asadmin  
->start-domain <your_domain>  
-> deploy --port 4848 --host localhost <dukes-age.war path>  
+> start-domain <your_domain>
+> start-database
+> deploy --port 4848 --host localhost <your_war path>  
 curl -i http://localhost:8080/dukes-age/webapi/dukesAge  

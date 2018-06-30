@@ -20,11 +20,11 @@ public class DukesAgeResource {
 
     @GET
     @Produces("text/plain")
-    public String dukeAge() {
+    public int dukeAge() {
 
-        LocalDate dukesBirthday = LocalDate.of(1995, Month.MAY, 23);
-        Period dukeAge = Period.between(dukesBirthday, LocalDate.now());
+        LocalDate dukeBirthday = LocalDate.of(1995, Month.MAY, 23);
+        Period dukeAge = Period.between(dukeBirthday, LocalDate.now());
 
-        return "Dukes age is: " + dukeAge.getYears();
+        return dukeAge.getYears();
     }
 }

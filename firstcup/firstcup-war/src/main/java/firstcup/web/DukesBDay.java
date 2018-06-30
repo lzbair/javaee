@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2014 Oracle and/or its affiliates. All rights reserved.
- *
+ * <p>
  * You may not modify, use, reproduce, or distribute this software except in
  * compliance with  the terms of the License at:
  * https://github.com/javaee/firstcup-examples/LICENSE.txt
@@ -8,10 +8,7 @@
 package firstcup.web;
 
 import firstcup.ejb.DukesBirthdayBean;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -20,20 +17,24 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Named
 @SessionScoped
 public class DukesBDay implements Serializable {
-   
-    @EJB
-    private DukesBirthdayBean dukesBirthdayBean;
+
+    private static final Logger logger = Logger.getLogger("firstcup.web.DukesBDay");
     protected int age;
     @NotNull
     protected Date yourBD;
     protected int ageDiff;
     protected int absAgeDiff;
     protected Double averageAgeDifference;
-    private static final Logger logger = Logger.getLogger("firstcup.web.DukesBDay");
+    @EJB
+    private DukesBirthdayBean dukesBirthdayBean;
 
 
     /** Creates a new instance of DukesBDay */
@@ -49,21 +50,24 @@ public class DukesBDay implements Serializable {
         logger.log(Level.INFO, "averageAgeDifference {0}", averageAgeDifference);
         return "/response.xhtml";
     }
-    
+
     /**
      * Get the value of age
      *
      * @return the value of age
      */
     public int getAge() {
-        try {
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target("http://localhost:8080/dukes-age/webapi/dukesAge");
-            String response = target.request().get(String.class);
-            age = Integer.parseInt(response);
-        } catch (IllegalArgumentException | NullPointerException | WebApplicationException ex) {
-            logger.severe("processing of HTTP response failed");
-        } 
+        if (this.age == 0) {
+            try {
+                Client client = ClientBuilder.newClient();
+                WebTarget target = client.target("http://localhost:8080/dukes-age/webapi/dukesAge");
+                String response = target.request().get(String.class);
+                age = Integer.parseInt(response);
+            } catch (RuntimeException ex) {
+                logger.severe("processing of HTTP response failed " + ex.toString());
+            }
+
+        }
         return age;
     }
 
