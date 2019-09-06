@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="W2J" default="all">
+  <property name="HOME" location="." />
+  
+  <path id="jaxws-classpath">
+    <fileset dir="${HOME}/lib">
+      <include name="*.jar" />
+    </fileset>
+   </path>
+
+  <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+    <classpath>
+	  <path refid="jaxws-classpath" />
+    </classpath>
+  </taskdef>
+
+  <target name="w2j" description="WSDL TO JAVA">
+                      
+  <property name="gensrcDir" value="${HOME}/gensrc"/>
+  <property name="wsdlDir" value="${HOME}/wsdl"/>           	
+  <property name="wsdlName" value="eComMaterials"/>
+  
+  
+  <wsimport
+    wsdl="${wsdlDir}/${wsdlName}/myWSDL.wsdl"
+    sourcedestdir="${gensrcDir}"
+    keep="true"
+    verbose="true"
+    binding="${wsdlDir}/${wsdlName}/jaxws-bindings.xml"
+	xnocompile="true">
+  </wsimport>
+  
+  </target>
+
+</project>

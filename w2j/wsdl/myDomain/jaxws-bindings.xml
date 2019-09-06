@@ -1,0 +1,32 @@
+<jaxws:bindings 
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"         
+        xmlns:jaxb="http://java.sun.com/xml/ns/jaxb">
+    <jaxws:package name="com.company.ecommerce.ticket.service"/>
+	
+	<jaxws:bindings node="wsdl:definitions/wsdl:types/xsd:schema[@targetNamespace='http://company.com/erp/sd/ecommerce/ticketlisting']">
+        <jaxb:schemaBindings>
+            <jaxb:package name="com.company.ecommerce.ticket.service.types"/>
+        </jaxb:schemaBindings>
+    </jaxws:bindings>
+	
+	<jaxws:bindings node="wsdl:definitions/wsdl:types/xsd:schema[1]">
+        <jaxb:bindings node="//xsd:complexType[@name='EcommerceTicketListingRequest']">
+            <jaxb:class name="TicketRequest"/>
+        </jaxb:bindings>
+		<jaxb:bindings node="//xsd:complexType[@name='EcommerceTicketListingResponse']">
+            <jaxb:class name="TicketResult"/>
+        </jaxb:bindings>
+    </jaxws:bindings>
+	
+	<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='SI_EcommerceTicketListing_Sync_Outbound']">
+        <jaxws:class name="EcommerceTicketService"/>
+    </jaxws:bindings>
+	
+	<jaxws:bindings node="wsdl:definitions/wsdl:portType[@name='SI_EcommerceTicketListing_Sync_Outbound']/wsdl:operation[@name='SI_EcommerceTicketListing_Sync_Outbound']">
+        <jaxws:method  name="getTickets"/>
+	</jaxws:bindings>
+	
+
+</jaxws:bindings>

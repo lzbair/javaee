@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project name="W2J" default="all">
+
+  <property name="HOME" location="." />
+
+
+<target name="w2j" description="WSDL TO JAVA">
+  
+	<path id="cxf.classpath">
+    <fileset dir="${HOME}/lib">
+      <include name="*.jar" />
+    </fileset>
+  </path>
+                    
+  <property name="gensrcDir" value="${HOME}/gensrc"/>
+  <property name="wsdlDir" value="${HOME}/wsdl"/>
+                	
+  <property name="wsdlDomain" value="myDomain"/>
+					
+  <java classname="org.apache.cxf.tools.wsdlto.WSDLToJava" fork="true">
+	<arg value="-b" />
+	<arg value="${wsdlDir}/${wsdlDomain}/jaxws-bindings.xml" />
+	<arg value="-d" />
+	<arg value="${gensrcDir}" />
+	<arg value="-wsdlLocation" />
+	<arg value="${wsdlDir}/${wsdlDomain}/myWSDL.wsdl" />
+	<classpath>
+		<path refid="cxf.classpath" />
+	</classpath>
+  </java>	
+  
+</target>
+
+</project>
